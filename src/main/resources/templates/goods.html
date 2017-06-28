@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>Internet Shop</title>
+
+<!--/*/ <th:block th:include="headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="header :: header"></th:block> /*/-->
+		<div th:if="${not #lists.isEmpty(goods)}">
+			<h2>Goods List</h2>
+			<table class="table table-striped">
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Code</th>
+					<th>View</th>
+					<th>Edit</th>
+					<th>Delete</th>
+				</tr>
+				<tr th:each="goods : ${goods}">
+					<td th:text="${goods.id}"><a href="/goods/${goods.id}">Id</a></td>
+					<td th:text="${goods.name}">Name</td>
+					<td th:text="${goods.description}">Description</td>
+					<td th:text="${goods.price}">Price</td>
+					<td th:text="${goods.code}">Code</td>
+					<td><a th:href="${'/goods/' + goods.id}">View</a></td>
+					<td><a th:href="${'/goods/edit/' + goods.id}">Edit</a></td>
+					<td><a th:href="${'/goods/delete/' + goods.id}">Delete</a></td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+</body>
+</html>
