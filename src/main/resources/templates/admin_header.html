@@ -4,16 +4,15 @@
 
 </head>
 <body>
-
 	<div class="container">
 		<div th:fragment="header">
 			<nav class="navbar navbar-default">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
 						<ul class="nav navbar-nav">
-							<li><a href="#" th:href="@{/goods}">Goods</a></li>
-							<li><a href="#" th:href="@{/admin}">Log in</a></li>
+							<li><a href="#" th:href="@{/admin/goods}">Goods</a></li>
+							<li><a href="#" th:href="@{/admin/goods/new}">Add goods</a></li>
+							<li><a href="#" th:href="@{/logout}">Log out</a></li>
 						</ul>
 
 					</div>
