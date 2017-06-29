@@ -21,7 +21,7 @@
 					<th>Code</th>
 				</tr>
 				<tr th:each="goods : ${goods}">
-					<td th:text="${goods.id}"><a href="/goods/${goods.id}">Id</a></td>
+					<td th:text="${goods.id}">Id</td>
 					<td th:text="${goods.name}">Name</td>
 					<td th:text="${goods.description}">Description</td>
 					<td th:text="${goods.price}">Price</td>

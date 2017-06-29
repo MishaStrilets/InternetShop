@@ -4,7 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import strilets.model.Goods;
+import strilets.model.Order;
 import strilets.services.GoodsService;
+import strilets.services.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-public class GoodsController {
+public class AppController {
 
 	private GoodsService goodsService;
 
@@ -26,13 +28,20 @@ public class GoodsController {
 		this.goodsService = goodsService;
 	}
 
+	private OrderService orderService;
+
+	@Autowired
+	public void setOrderService(OrderService orderService) {
+		this.orderService = orderService;
+	}
+
 	@RequestMapping("/")
 	String index() {
 		return "index";
 	}
 
 	@RequestMapping(value = "/goods", method = RequestMethod.GET)
-	public String list(Model model) {
+	public String listGoods(Model model) {
 		model.addAttribute("goods", goodsService.listAllGoods());
 		return "goods";
 	}
@@ -71,7 +80,7 @@ public class GoodsController {
 	}
 
 	@RequestMapping("/admin/goods/edit/{id}")
-	public String edit(@PathVariable Integer id, Model model) {
+	public String editGoods(@PathVariable Integer id, Model model) {
 		model.addAttribute("goods", goodsService.getGoodsById(id));
 		return "admin_goods_form";
 	}
@@ -85,12 +94,39 @@ public class GoodsController {
 	@RequestMapping(value = "/admin/goods", method = RequestMethod.POST)
 	public String saveGoods(Goods goods) {
 		goodsService.saveGoods(goods);
-		return "redirect:/admin/goods/" + goods.getId();
+		return "redirect:/admin/goods/";
 	}
 
 	@RequestMapping("/admin/goods/delete/{id}")
-	public String delete(@PathVariable Integer id) {
+	public String deleteGoods(@PathVariable Integer id) {
 		goodsService.deleteGoods(id);
 		return "redirect:/admin/goods";
+	}
+
+	@RequestMapping("/order/{id}")
+	public String newOrder(@PathVariable Integer id, Model model) {
+		Order order = new Order();
+		model.addAttribute("order", order);
+		int code = goodsService.getGoodsById(id).getCode();
+		order.setCode(code);
+		return "order_form";
+	}
+
+	@RequestMapping(value = "/buy", method = RequestMethod.POST)
+	public String saveOrder(Order order) {
+		orderService.saveOrder(order);
+		return "redirect:/goods";
+	}
+
+	@RequestMapping(value = "/admin/orders", method = RequestMethod.GET)
+	public String adminOrders(Model model) {
+		model.addAttribute("order", orderService.getAllOrders());
+		return "admin_orders";
+	}
+	
+	@RequestMapping("/admin/orders/delete/{id}")
+	public String deleteOrder(@PathVariable Integer id) {
+		orderService.deleteOrder(id);
+		return "redirect:/admin/orders";
 	}
 }

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>Internet Shop</title>
+
+<!--/*/ <th:block th:include="links :: head"></th:block> /*/-->
+</head>
+<body>
+	<div class="container">
+		<!--/*/ <th:block th:include="admin_header :: header"></th:block> /*/-->
+
+		<div th:if="${not #lists.isEmpty(order)}">
+			<h2>List orders</h2>
+			<table class="table table-striped">
+				<tr>
+					<th>Id</th>
+					<th>Surname</th>
+					<th>Cell phone</th>
+					<th>Place</th>
+					<th>Code</th>
+				</tr>
+				<tr th:each="order : ${order}">
+					<td th:text="${order.id}">Id</td>
+					<td th:text="${order.surname}">Surname</td>
+					<td th:text="${order.cellPhone}">Cell phone</td>
+					<td th:text="${order.place}">Place</td>
+					<td th:text="${order.code}">Code</td>
+					<td><a th:href="${'/admin/orders/delete/' + order.id}">Delete</a></td>
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+</body>
+</html>

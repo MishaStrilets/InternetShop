@@ -23,8 +23,8 @@ public class GoodsServiceImpl implements GoodsService {
 		return goodsRepository.findOne(id);
 	}
 
-	public Goods saveGoods(Goods product) {
-		return goodsRepository.save(product);
+	public Goods saveGoods(Goods goods) {
+		return goodsRepository.save(goods);
 	}
 
 	public void deleteGoods(Integer id) {

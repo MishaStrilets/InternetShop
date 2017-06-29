@@ -10,10 +10,10 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "GOODS")
-public class Goods {
+@Table(name = "ORDERS")
+public class Order {
 
-	public Goods() {
+	public Order() {
 	}
 
 	@Id
@@ -22,17 +22,18 @@ public class Goods {
 
 	@NotNull
 	@Size(max = 30)
-	@Column(name = "NAME")
-	private String name;
+	@Column(name = "SURNAME")
+	private String surname;
 
 	@NotNull
-	@Size(max = 255)
-	@Column(name = "DESCRIPTION")
-	private String description;
+	@Size(max = 15)
+	@Column(name = "CELL_PHONE")
+	private String cellPhone;
 
 	@NotNull
-	@Column(name = "PRICE")
-	private float price;
+	@Size(max = 30)
+	@Column(name = "PLACE")
+	private String place;
 
 	@NotNull
 	@Column(name = "CODE", unique = true)
@@ -46,28 +47,28 @@ public class Goods {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getSurname() {
+		return surname;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setSurname(String surname) {
+		this.surname = surname;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getCellPhone() {
+		return cellPhone;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCellPhone(String cellPhone) {
+		this.cellPhone = cellPhone;
 	}
 
-	public float getPrice() {
-		return price;
+	public String getPlace() {
+		return place;
 	}
 
-	public void setPrice(float price) {
-		this.price = price;
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	public int getCode() {

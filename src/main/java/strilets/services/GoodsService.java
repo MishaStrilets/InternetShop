@@ -8,7 +8,7 @@ public interface GoodsService {
 
 	Goods getGoodsById(Integer id);
 
-	Goods saveGoods(Goods product);
+	Goods saveGoods(Goods goods);
 
 	void deleteGoods(Integer id);
 }
