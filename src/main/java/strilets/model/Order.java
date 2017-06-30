@@ -36,8 +36,13 @@ public class Order {
 	private String place;
 
 	@NotNull
-	@Column(name = "CODE", unique = true)
+	@Column(name = "CODE")
 	private int code;
+
+	@NotNull
+	@Size(max = 30)
+	@Column(name = "DATE")
+	private String date;
 
 	public int getId() {
 		return id;
@@ -77,6 +82,14 @@ public class Order {
 
 	public void setCode(int code) {
 		this.code = code;
+	}
+
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
 	}
 
 }

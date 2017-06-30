@@ -109,6 +109,8 @@ public class AppController {
 		model.addAttribute("order", order);
 		int code = goodsService.getGoodsById(id).getCode();
 		order.setCode(code);
+		String date = new java.util.Date().toString();
+		order.setDate(date);
 		return "order_form";
 	}
 
@@ -123,7 +125,7 @@ public class AppController {
 		model.addAttribute("order", orderService.getAllOrders());
 		return "admin_orders";
 	}
-	
+
 	@RequestMapping("/admin/orders/delete/{id}")
 	public String deleteOrder(@PathVariable Integer id) {
 		orderService.deleteOrder(id);
