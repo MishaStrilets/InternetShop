@@ -14,6 +14,12 @@
 						<ul class="nav navbar-nav">
 							<li><a href="#" th:href="@{/goods}">Goods</a></li>
 							<li><a href="#" th:href="@{/admin}">Log in</a></li>
+							<li>
+								<form th:action="@{/search}" th:object="${search}" method="post">
+									<input type="search" name="search" />
+									<input type="submit" value="Search" />
+								</form>
+							</li>
 						</ul>
 
 					</div>

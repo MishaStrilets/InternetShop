@@ -1,10 +1,10 @@
-package strilets.services;
+package strilets.dao;
 
 import java.util.List;
 
 import strilets.model.Order;
 
-public interface OrderService {
+public interface OrderDao {
 
 	List<Order> getAllOrders();
 

@@ -1,30 +1,31 @@
 package strilets.services;
 
-import strilets.model.Order;
-import strilets.repositories.OrderRepository;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-@Service
+import strilets.dao.OrderDao;
+import strilets.model.Order;
+
+@Service("orderService")
+@Transactional
 public class OrderServiceImpl implements OrderService {
 
-	private OrderRepository orderRepository;
-
 	@Autowired
-	public void setOrderRepository(OrderRepository orderRepository) {
-		this.orderRepository = orderRepository;
+	private OrderDao dao;
+
+	public void saveOrder(Order order) {
+		dao.saveOrder(order);
 	}
 
-	public Iterable<Order> getAllOrders() {
-		return orderRepository.findAll();
+	public void deleteOrder(int id) {
+		dao.deleteOrder(id);
 	}
 
-	public Order saveOrder(Order order) {
-		return orderRepository.save(order);
+	public List<Order> getAllOrders() {
+		return dao.getAllOrders();
 	}
 
-	public void deleteOrder(Integer id) {
-		orderRepository.delete(id);
-	}
 }

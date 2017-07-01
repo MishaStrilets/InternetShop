@@ -1,10 +1,10 @@
-package strilets.services;
+package strilets.dao;
 
 import java.util.List;
 
 import strilets.model.Goods;
 
-public interface GoodsService {
+public interface GoodsDao {
 
 	List<Goods> getAllGoods();
 
@@ -13,8 +13,6 @@ public interface GoodsService {
 	void saveGoods(Goods goods);
 
 	void deleteGoods(int id);
-
-	void updateGoods(Goods goods);
 
 	List<Goods> getGoodsByName(String name);
 }

@@ -1,5 +1,7 @@
 package strilets.controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -24,19 +26,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AppController {
 
+	@Autowired
 	private GoodsService goodsService;
 
 	@Autowired
-	public void setGoodsService(GoodsService goodsService) {
-		this.goodsService = goodsService;
-	}
-
 	private OrderService orderService;
-
-	@Autowired
-	public void setOrderService(OrderService orderService) {
-		this.orderService = orderService;
-	}
 
 	@Autowired
 	MessageSource messageSource;
@@ -48,7 +42,8 @@ public class AppController {
 
 	@RequestMapping(value = "/goods", method = RequestMethod.GET)
 	public String listGoods(Model model) {
-		model.addAttribute("goods", goodsService.listAllGoods());
+		List<Goods> goods = goodsService.getAllGoods();
+		model.addAttribute("goods", goods);
 		return "goods";
 	}
 
@@ -60,10 +55,9 @@ public class AppController {
 
 	@RequestMapping(value = { "/admin" }, method = RequestMethod.GET)
 	public String admin(Model model) {
-		model.addAttribute("goods", goodsService.listAllGoods());
+		model.addAttribute("goods", goodsService.getAllGoods());
 		return "admin_goods";
 	}
-
 
 	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request,
@@ -77,23 +71,34 @@ public class AppController {
 
 	@RequestMapping(value = "/admin/goods", method = RequestMethod.GET)
 	public String adminGoods(Model model) {
-		model.addAttribute("goods", goodsService.listAllGoods());
+		model.addAttribute("goods", goodsService.getAllGoods());
 		return "admin_goods";
 	}
 
 	@RequestMapping("/admin/goods/edit/{id}")
 	public String editGoods(@PathVariable Integer id, Model model) {
-		model.addAttribute("goods", goodsService.getGoodsById(id));
-		return "admin_goods_form";
+		Goods goods = goodsService.getGoodsById(id);
+		model.addAttribute("goods", goods);
+		return "admin_goods_form_edit";
+	}
+
+	@RequestMapping(value = "/admin/goods/edit", method = RequestMethod.POST)
+	public String updateGoods(@Valid Goods goods, BindingResult result) {
+		if (result.hasErrors()) {
+			return "admin_goods_form_edit";
+		}
+		goodsService.updateGoods(goods);
+		return "redirect:/admin/goods/";
 	}
 
 	@RequestMapping("/admin/goods/new")
 	public String newGoods(Model model) {
-		model.addAttribute("goods", new Goods());
+		Goods goods = new Goods();
+		model.addAttribute("goods", goods);
 		return "admin_goods_form";
 	}
 
-	@RequestMapping(value = "/admin/goods", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/goods/new", method = RequestMethod.POST)
 	public String saveGoods(@Valid Goods goods, BindingResult result) {
 		if (result.hasErrors()) {
 			return "admin_goods_form";
@@ -130,7 +135,8 @@ public class AppController {
 
 	@RequestMapping(value = "/admin/orders", method = RequestMethod.GET)
 	public String adminOrders(Model model) {
-		model.addAttribute("order", orderService.getAllOrders());
+		List<Order> orders = orderService.getAllOrders();
+		model.addAttribute("order", orders);
 		return "admin_orders";
 	}
 
@@ -138,5 +144,13 @@ public class AppController {
 	public String deleteOrder(@PathVariable Integer id) {
 		orderService.deleteOrder(id);
 		return "redirect:/admin/orders";
+	}
+
+	@RequestMapping(value = "/search", method = { RequestMethod.POST,
+			RequestMethod.GET })
+	public String searchGoods(String search, Model model) {
+		List<Goods> goods = goodsService.getGoodsByName(search);
+		model.addAttribute("goods", goods);
+		return "goods";
 	}
 }
