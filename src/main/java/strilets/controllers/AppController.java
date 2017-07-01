@@ -2,6 +2,7 @@ package strilets.controllers;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import strilets.model.Goods;
 import strilets.model.Order;
@@ -9,11 +10,13 @@ import strilets.services.GoodsService;
 import strilets.services.OrderService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,6 +38,9 @@ public class AppController {
 		this.orderService = orderService;
 	}
 
+	@Autowired
+	MessageSource messageSource;
+
 	@RequestMapping("/")
 	String index() {
 		return "index";
@@ -53,9 +59,11 @@ public class AppController {
 	}
 
 	@RequestMapping(value = { "/admin" }, method = RequestMethod.GET)
-	public String admin() {
+	public String admin(Model model) {
+		model.addAttribute("goods", goodsService.listAllGoods());
 		return "admin_goods";
 	}
+
 
 	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
 	public String logoutPage(HttpServletRequest request,
@@ -73,12 +81,6 @@ public class AppController {
 		return "admin_goods";
 	}
 
-	@RequestMapping("/admin/goods/{id}")
-	public String adminShowGoods(@PathVariable Integer id, Model model) {
-		model.addAttribute("goods", goodsService.getGoodsById(id));
-		return "admin_goods_show";
-	}
-
 	@RequestMapping("/admin/goods/edit/{id}")
 	public String editGoods(@PathVariable Integer id, Model model) {
 		model.addAttribute("goods", goodsService.getGoodsById(id));
@@ -92,7 +94,10 @@ public class AppController {
 	}
 
 	@RequestMapping(value = "/admin/goods", method = RequestMethod.POST)
-	public String saveGoods(Goods goods) {
+	public String saveGoods(@Valid Goods goods, BindingResult result) {
+		if (result.hasErrors()) {
+			return "admin_goods_form";
+		}
 		goodsService.saveGoods(goods);
 		return "redirect:/admin/goods/";
 	}
@@ -107,15 +112,18 @@ public class AppController {
 	public String newOrder(@PathVariable Integer id, Model model) {
 		Order order = new Order();
 		model.addAttribute("order", order);
-		int code = goodsService.getGoodsById(id).getCode();
-		order.setCode(code);
+		String buy = goodsService.getGoodsById(id).getName();
+		order.setBuy(buy);
 		String date = new java.util.Date().toString();
 		order.setDate(date);
 		return "order_form";
 	}
 
-	@RequestMapping(value = "/buy", method = RequestMethod.POST)
-	public String saveOrder(Order order) {
+	@RequestMapping(value = "/order", method = RequestMethod.POST)
+	public String saveOrder(@Valid Order order, BindingResult result) {
+		if (result.hasErrors()) {
+			return "order_form";
+		}
 		orderService.saveOrder(order);
 		return "redirect:/goods";
 	}

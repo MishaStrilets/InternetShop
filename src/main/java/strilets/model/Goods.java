@@ -9,6 +9,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 @Entity
 @Table(name = "GOODS")
 public class Goods {
@@ -20,12 +22,12 @@ public class Goods {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@NotNull
+	@NotBlank
 	@Size(max = 30)
 	@Column(name = "NAME")
 	private String name;
 
-	@NotNull
+	@NotBlank
 	@Size(max = 255)
 	@Column(name = "DESCRIPTION")
 	private String description;
@@ -33,10 +35,6 @@ public class Goods {
 	@NotNull
 	@Column(name = "PRICE")
 	private float price;
-
-	@NotNull
-	@Column(name = "CODE", unique = true)
-	private int code;
 
 	public int getId() {
 		return id;
@@ -68,14 +66,6 @@ public class Goods {
 
 	public void setPrice(float price) {
 		this.price = price;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
 	}
 
 }

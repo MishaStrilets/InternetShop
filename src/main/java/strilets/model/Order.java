@@ -6,8 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name = "ORDERS")
@@ -20,29 +21,27 @@ public class Order {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@NotNull
+	@NotBlank
 	@Size(max = 30)
 	@Column(name = "SURNAME")
 	private String surname;
 
-	@NotNull
+	@NotBlank
 	@Size(max = 15)
 	@Column(name = "CELL_PHONE")
 	private String cellPhone;
 
-	@NotNull
+	@NotBlank
 	@Size(max = 30)
 	@Column(name = "PLACE")
 	private String place;
 
-	@NotNull
-	@Column(name = "CODE")
-	private int code;
-
-	@NotNull
 	@Size(max = 30)
 	@Column(name = "DATE")
 	private String date;
+
+	@Column(name = "BUY")
+	private String buy;
 
 	public int getId() {
 		return id;
@@ -76,20 +75,20 @@ public class Order {
 		this.place = place;
 	}
 
-	public int getCode() {
-		return code;
-	}
-
-	public void setCode(int code) {
-		this.code = code;
-	}
-
 	public String getDate() {
 		return date;
 	}
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getBuy() {
+		return buy;
+	}
+
+	public void setBuy(String buy) {
+		this.buy = buy;
 	}
 
 }
