@@ -15,4 +15,6 @@ public interface GoodsDao {
 	void deleteGoods(int id);
 
 	List<Goods> getGoodsByName(String name);
+	
+	List<Goods> sortGoods(String sort);
 }

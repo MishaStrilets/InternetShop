@@ -13,13 +13,26 @@
 						<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
 						<ul class="nav navbar-nav">
 							<li><a href="#" th:href="@{/goods}">Goods</a></li>
-							<li><a href="#" th:href="@{/admin}">Log in</a></li>
 							<li>
-								<form th:action="@{/search}" th:object="${search}" method="post">
-									<input type="search" name="search" />
-									<input type="submit" value="Search" />
+								<form th:action="@{/goods-search}" th:object="${search}">
+									<p>
+										Search goods: <input type="search" name="search" /> <input
+											type="submit" value="Search" />
+									</p>
 								</form>
 							</li>
+							<li>
+								<form th:action="@{/goods-sort}" th:object="${sort}">
+									<p>
+										Sort goods by price by <input type="radio" name="sort"
+											value="add" checked="checked" />add <input type="radio"
+											name="sort" value="asc" />ascending <input type="radio"
+											name="sort" value="desc" />descending <input type="submit"
+											value="Sort" />
+									</p>
+								</form>
+							</li>
+							<li><a href="#" th:href="@{/admin}">Log in</a></li>
 						</ul>
 
 					</div>

@@ -17,4 +17,6 @@ public interface GoodsService {
 	void updateGoods(Goods goods);
 
 	List<Goods> getGoodsByName(String name);
+	
+	List<Goods> sortGoods(String sort);
 }

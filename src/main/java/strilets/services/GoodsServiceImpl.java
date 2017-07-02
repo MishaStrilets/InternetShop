@@ -45,4 +45,8 @@ public class GoodsServiceImpl implements GoodsService {
 		return dao.getGoodsByName(name);
 	}
 
+	public List<Goods> sortGoods(String sort) {
+		return dao.sortGoods(sort);
+	}
+
 }

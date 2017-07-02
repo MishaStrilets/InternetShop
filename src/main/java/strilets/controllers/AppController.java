@@ -47,6 +47,13 @@ public class AppController {
 		return "goods";
 	}
 
+	@RequestMapping(value = "/goods-sort", method = RequestMethod.GET)
+	public String sortGoods(String sort, Model model) {
+		List<Goods> goods = goodsService.sortGoods(sort);
+		model.addAttribute("goods", goods);
+		return "goods";
+	}
+
 	@RequestMapping("/goods/{id}")
 	public String showGoods(@PathVariable Integer id, Model model) {
 		model.addAttribute("goods", goodsService.getGoodsById(id));
@@ -146,8 +153,7 @@ public class AppController {
 		return "redirect:/admin/orders";
 	}
 
-	@RequestMapping(value = "/search", method = { RequestMethod.POST,
-			RequestMethod.GET })
+	@RequestMapping(value = "/goods-search", method = RequestMethod.GET)
 	public String searchGoods(String search, Model model) {
 		List<Goods> goods = goodsService.getGoodsByName(search);
 		model.addAttribute("goods", goods);

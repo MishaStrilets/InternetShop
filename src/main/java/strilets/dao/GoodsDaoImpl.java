@@ -5,6 +5,7 @@ import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
@@ -40,6 +41,27 @@ public class GoodsDaoImpl extends AbstractDao<Integer, Goods> implements
 		Criteria criteria = createEntityCriteria();
 		List<Goods> goods = criteria.add(
 				Restrictions.like("name", name, MatchMode.START)).list();
+		return goods;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Goods> sortGoods(String sort) {
+
+		Criteria criteria = createEntityCriteria();
+		List<Goods> goods = null;
+
+		if (sort.equals("asc")) {
+			goods = criteria.addOrder(Order.asc("price")).list();
+		}
+
+		else if (sort.equals("desc")) {
+			goods = criteria.addOrder(Order.desc("price")).list();
+		}
+
+		else if (sort.equals("add")) {
+			goods = criteria.list();
+		}
+
 		return goods;
 	}
 
