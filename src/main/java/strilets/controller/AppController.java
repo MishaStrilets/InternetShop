@@ -1,4 +1,4 @@
-package strilets.controllers;
+package strilets.controller;
 
 import java.util.List;
 
@@ -54,16 +54,15 @@ public class AppController {
 		return "goods";
 	}
 
-	@RequestMapping("/goods/{id}")
-	public String showGoods(@PathVariable Integer id, Model model) {
+	@RequestMapping("/goods-{id}")
+	public String viewGoods(@PathVariable Integer id, Model model) {
 		model.addAttribute("goods", goodsService.getGoodsById(id));
-		return "goods_show";
+		return "goods_view";
 	}
 
-	@RequestMapping(value = { "/admin" }, method = RequestMethod.GET)
-	public String admin(Model model) {
-		model.addAttribute("goods", goodsService.getAllGoods());
-		return "admin_goods";
+	@RequestMapping("/admin")
+	public String admin() {
+		return "admin_index";
 	}
 
 	@RequestMapping(value = { "/logout" }, method = RequestMethod.GET)
@@ -76,58 +75,57 @@ public class AppController {
 		return "index";
 	}
 
-	@RequestMapping(value = "/admin/goods", method = RequestMethod.GET)
+	@RequestMapping(value = "/admin-goods", method = RequestMethod.GET)
 	public String adminGoods(Model model) {
 		model.addAttribute("goods", goodsService.getAllGoods());
 		return "admin_goods";
 	}
 
-	@RequestMapping("/admin/goods/edit/{id}")
+	@RequestMapping("/admin-goods-edit-{id}")
 	public String editGoods(@PathVariable Integer id, Model model) {
 		Goods goods = goodsService.getGoodsById(id);
 		model.addAttribute("goods", goods);
 		return "admin_goods_form_edit";
 	}
 
-	@RequestMapping(value = "/admin/goods/edit", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin-goods-edit", method = RequestMethod.POST)
 	public String updateGoods(@Valid Goods goods, BindingResult result) {
 		if (result.hasErrors()) {
 			return "admin_goods_form_edit";
 		}
 		goodsService.updateGoods(goods);
-		return "redirect:/admin/goods/";
+		return "redirect:/admin-goods/";
 	}
 
-	@RequestMapping("/admin/goods/new")
+	@RequestMapping("/admin-goods-new")
 	public String newGoods(Model model) {
 		Goods goods = new Goods();
 		model.addAttribute("goods", goods);
 		return "admin_goods_form";
 	}
 
-	@RequestMapping(value = "/admin/goods/new", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin-goods-new", method = RequestMethod.POST)
 	public String saveGoods(@Valid Goods goods, BindingResult result) {
 		if (result.hasErrors()) {
 			return "admin_goods_form";
 		}
 		goodsService.saveGoods(goods);
-		return "redirect:/admin/goods/";
+		return "redirect:/admin-goods";
 	}
 
-	@RequestMapping("/admin/goods/delete/{id}")
+	@RequestMapping("/admin-goods-delete-{id}")
 	public String deleteGoods(@PathVariable Integer id) {
 		goodsService.deleteGoods(id);
-		return "redirect:/admin/goods";
+		return "redirect:/admin-goods";
 	}
 
-	@RequestMapping("/order/{id}")
+	@RequestMapping("/order-{id}")
 	public String newOrder(@PathVariable Integer id, Model model) {
 		Order order = new Order();
 		model.addAttribute("order", order);
-		String buy = goodsService.getGoodsById(id).getName();
-		order.setBuy(buy);
 		String date = new java.util.Date().toString();
 		order.setDate(date);
+		order.setBuy(id);
 		return "order_form";
 	}
 
@@ -140,17 +138,23 @@ public class AppController {
 		return "redirect:/goods";
 	}
 
-	@RequestMapping(value = "/admin/orders", method = RequestMethod.GET)
-	public String adminOrders(Model model) {
+	@RequestMapping(value = "/admin-orders", method = RequestMethod.GET)
+	public String listOrders(Model model) {
 		List<Order> orders = orderService.getAllOrders();
 		model.addAttribute("order", orders);
 		return "admin_orders";
 	}
 
-	@RequestMapping("/admin/orders/delete/{id}")
+	@RequestMapping("/admin-orders-delete-{id}")
 	public String deleteOrder(@PathVariable Integer id) {
 		orderService.deleteOrder(id);
-		return "redirect:/admin/orders";
+		return "redirect:/admin-orders";
+	}
+
+	@RequestMapping("/admin-goods-view-{id}")
+	public String adminViewGoods(@PathVariable Integer id, Model model) {
+		model.addAttribute("goods", goodsService.getGoodsById(id));
+		return "admin_goods_view";
 	}
 
 	@RequestMapping(value = "/goods-search", method = RequestMethod.GET)

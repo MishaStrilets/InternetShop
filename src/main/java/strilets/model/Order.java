@@ -19,7 +19,7 @@ public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private int orders_id;
 
 	@NotBlank
 	@Size(max = 30)
@@ -40,15 +40,14 @@ public class Order {
 	@Column(name = "DATE")
 	private String date;
 
-	@Column(name = "BUY")
-	private String buy;
+	private int buy;
 
 	public int getId() {
-		return id;
+		return orders_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setId(int orders_id) {
+		this.orders_id = orders_id;
 	}
 
 	public String getSurname() {
@@ -83,11 +82,11 @@ public class Order {
 		this.date = date;
 	}
 
-	public String getBuy() {
+	public int getBuy() {
 		return buy;
 	}
 
-	public void setBuy(String buy) {
+	public void setBuy(int buy) {
 		this.buy = buy;
 	}
 

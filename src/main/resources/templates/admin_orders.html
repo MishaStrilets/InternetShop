@@ -27,8 +27,8 @@
 					<td th:text="${order.cellPhone}">Cell phone</td>
 					<td th:text="${order.place}">Place</td>
 					<td th:text="${order.date}">Date</td>
-					<td th:text="${order.buy}">Buy</td>
-					<td><a th:href="${'/admin/orders/delete/' + order.id}">Delete</a></td>
+					<td><a th:href="${'/admin-goods-view-' + order.buy}">View</a></td>
+					<td><a th:href="${'/admin-orders-delete-' + order.id}">Delete</a></td>
 				</tr>
 			</table>
 
