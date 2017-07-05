@@ -16,16 +16,16 @@
 				<tr>
 					<th>Name</th>
 					<th>Price</th>
+					<th>View</th>
 				</tr>
 				<tr th:each="goods : ${goods}">
 					<td th:text="${goods.name}">Name</td>
 					<td th:text="${goods.price}">Price</td>
-					<td><a th:href="${'/goods-' + goods.id}">View</a></td>
+					<td><a th:href="${'/goods-' + goods.id}" class="btn btn-info">View</a></td>
 				</tr>
 			</table>
-
 		</div>
+		<!--/*/ <th:block th:include="footer :: footer"></th:block> /*/-->
 	</div>
-
 </body>
 </html>

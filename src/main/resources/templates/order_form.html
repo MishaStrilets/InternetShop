@@ -9,10 +9,8 @@
 <body>
 	<div class="container">
 		<!--/*/ <th:block th:include="header :: header"></th:block> /*/-->
-
-		<h2>Form:</h2>
+		<h2>Application form:</h2>
 		<div>
-
 			<form class="form-horizontal" th:object="${order}"
 				th:action="@{/order}" method="post">
 				<input type="hidden" th:field="*{id}" /> <input type="hidden" />
@@ -22,7 +20,7 @@
 					<div class="col-sm-10">
 						<input type="text" class="form-control" th:field="*{surname}" />
 						<div style="color: #ff0000">
-							<div th:errors="*{surname}"></div>
+							<div th:errors="*{surname}" class="alert alert-danger"></div>
 							<div th:if="${#fields.hasErrors('*{surname}')}"></div>
 						</div>
 					</div>
@@ -33,7 +31,7 @@
 					<div class="col-sm-10">
 						<input type="text" class="form-control" th:field="*{cellPhone}" />
 						<div style="color: #ff0000">
-							<div th:errors="*{cellPhone}"></div>
+							<div th:errors="*{cellPhone}" class="alert alert-danger"></div>
 							<div th:if="${#fields.hasErrors('*{cellPhone}')}"></div>
 						</div>
 					</div>
@@ -44,23 +42,23 @@
 					<div class="col-sm-10">
 						<input type="text" class="form-control" th:field="*{place}" />
 						<div style="color: #ff0000">
-							<div th:errors="*{place}"></div>
+							<div th:errors="*{place}" class="alert alert-danger"></div>
 							<div th:if="${#fields.hasErrors('*{place}')}"></div>
 						</div>
 					</div>
 				</div>
 
 				<input type="hidden" th:field="*{date}" /> <input type="hidden" />
-				
+
 				<input type="hidden" th:field="*{buy}" /> <input type="hidden" />
 
 				<div class="row">
-					<button type="submit" class="btn btn-default">Buy</button>
+					<button type="submit" class="btn btn-success">Buy</button>
 				</div>
 
 			</form>
 		</div>
+		<!--/*/ <th:block th:include="footer :: footer"></th:block> /*/-->
 	</div>
-
 </body>
 </html>

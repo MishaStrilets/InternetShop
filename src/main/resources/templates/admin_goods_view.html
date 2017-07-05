@@ -10,29 +10,30 @@
 	<div class="container">
 		<!--/*/ <th:block th:include="admin_header :: header"></th:block> /*/-->
 
-		<h2>Goods</h2>
+		<h2 th:text="${goods.name}">Name</h2>
+		<hr />
 		<div>
 			<form class="form-horizontal">
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Name:</label>
-					<div class="col-sm-10">
-						<p class="form-control-static" th:text="${goods.name}">Name</p>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">Description:</label>
+					<h4 class="col-sm-2">
+						<span class="label label-info">Description:</span>
+					</h4>
 					<div class="col-sm-10">
 						<p class="form-control-static" th:text="${goods.description}">Description</p>
 					</div>
 				</div>
+				<hr />
 				<div class="form-group">
-					<label class="col-sm-2 control-label">Price:</label>
+					<h4 class="col-sm-2">
+						<span class="label label-info">Price:</span>
+					</h4>
 					<div class="col-sm-10">
 						<p class="form-control-static" th:text="${goods.price}">Price</p>
 					</div>
 				</div>
 			</form>
 		</div>
+		<!--/*/ <th:block th:include="footer :: footer"></th:block> /*/-->
 	</div>
 </body>
 </html>
