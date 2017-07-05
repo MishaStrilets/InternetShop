@@ -4,49 +4,47 @@
 
 </head>
 <body>
-
 	<div class="container">
 		<div th:fragment="header">
-			<nav class="navbar navbar-default">
+			<nav class="navbar">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#" th:href="@{/}">Home</a>
-						<ul class="nav navbar-nav">
-							<li><a href="#" th:href="@{/goods}">Goods</a></li>
-							<li>
-								<form th:action="@{/goods-search}" th:object="${search}">
-									<p>
-										Search goods: <input type="search" name="search" /> <input
-											type="submit" value="Search" />
-									</p>
-								</form>
-							</li>
-							<li>
-								<form th:action="@{/goods-sort}" th:object="${sort}">
-									<p>
-										Sort goods by price by <input type="radio" name="sort"
-											value="add" checked="checked" />add <input type="radio"
-											name="sort" value="asc" />ascending <input type="radio"
-											name="sort" value="desc" />descending <input type="submit"
-											value="Sort" />
-									</p>
-								</form>
-							</li>
-							<li><a href="#" th:href="@{/admin}">Log in</a></li>
-						</ul>
-
+						<div class="navbar-brand">Internet Shop</div>
 					</div>
+					<ul class="nav navbar-nav">
+						<li><a th:href="@{/}" class="menu">Home</a></li>
+						<li><a th:href="@{/goods}" class="menu">Goods</a></li>
+					</ul>
+
+					<form class="navbar-form navbar-left" th:action="@{/goods-search}"
+						th:object="${search}">
+						<div>
+							<input type="search" name="search" placeholder="Search goods"
+								class="form-control" />
+							<button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</form>
+
+					<form class="navbar-form navbar-left" th:action="@{/goods-sort}"
+						th:object="${sort}">
+						<div>
+							<input type="radio" name="sort" value="add" hidden="true"
+								checked="checked" /> <input type="radio" name="sort"
+								value="asc" /><i class="glyphicon glyphicon-sort-by-order"></i>
+							<input type="radio" name="sort" value="desc" /><i
+								class="glyphicon glyphicon-sort-by-order-alt"></i>
+							<button class="btn btn-default" type="submit" value="Sort">Sort</button>
+
+						</div>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a th:href="@{/admin}" class="admin"><span
+								class="glyphicon glyphicon-log-in"></span> Log in</a></li>
+					</ul>
 				</div>
 			</nav>
-
-			<div class="jumbotron">
-				<div class="row text-center">
-					<div class="">
-						<h2>Internet Shop</h2>
-					</div>
-				</div>
-
-			</div>
 		</div>
 	</div>
 </body>

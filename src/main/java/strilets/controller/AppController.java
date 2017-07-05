@@ -163,4 +163,18 @@ public class AppController {
 		model.addAttribute("goods", goods);
 		return "goods";
 	}
+	
+	@RequestMapping(value = "/admin-goods-search", method = RequestMethod.GET)
+	public String adminSearchGoods(String search, Model model) {
+		List<Goods> goods = goodsService.getGoodsByName(search);
+		model.addAttribute("goods", goods);
+		return "admin_goods";
+	}
+	
+	@RequestMapping(value = "/admin-goods-sort", method = RequestMethod.GET)
+	public String adminSortGoods(String sort, Model model) {
+		List<Goods> goods = goodsService.sortGoods(sort);
+		model.addAttribute("goods", goods);
+		return "admin_goods";
+	}
 }

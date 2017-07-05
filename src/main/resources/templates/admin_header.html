@@ -6,29 +6,48 @@
 <body>
 	<div class="container">
 		<div th:fragment="header">
-			<nav class="navbar navbar-default">
+			<nav class="navbar">
 				<div class="container-fluid">
 					<div class="navbar-header">
-						<a class="navbar-brand" href="#" th:href="@{/admin}">Home</a>
-						<ul class="nav navbar-nav">
-							<li><a href="#" th:href="@{/admin-goods}">Goods</a></li>
-							<li><a href="#" th:href="@{/admin-goods-new}">Add goods</a></li>
-							<li><a href="#" th:href="@{/admin-orders}">Orders</a></li>
-							<li><a href="#" th:href="@{/logout}">Log out</a></li>
-						</ul>
-
+						<div class="navbar-brand">Internet Shop</div>
 					</div>
+					<ul class="nav navbar-nav">
+						<li><a th:href="@{/admin}" class="menu">Home</a></li>
+						<li><a th:href="@{/admin-goods}" class="menu">Goods</a></li>
+						<li><a th:href="@{/admin-goods-new}" class="menu">Add
+								goods</a></li>
+						<li><a th:href="@{/admin-orders}" class="menu">Orders</a></li>
+					</ul>
+
+					<form class="navbar-form navbar-left"
+						th:action="@{/admin-goods-search}" th:object="${search}">
+						<div>
+							<input type="search" name="search" placeholder="Search goods"
+								class="form-control" />
+							<button class="btn btn-default" type="submit">
+								<i class="glyphicon glyphicon-search"></i>
+							</button>
+						</div>
+					</form>
+
+					<form class="navbar-form navbar-left"
+						th:action="@{/admin-goods-sort}" th:object="${sort}">
+						<div>
+							<input type="radio" name="sort" value="add" hidden="true"
+								checked="checked" /> <input type="radio" name="sort"
+								value="asc" /><i class="glyphicon glyphicon-sort-by-order"></i>
+							<input type="radio" name="sort" value="desc" /><i
+								class="glyphicon glyphicon-sort-by-order-alt"></i>
+							<button class="btn btn-default" type="submit" value="Sort">Sort</button>
+
+						</div>
+					</form>
+					<ul class="nav navbar-nav navbar-right">
+						<li><a th:href="@{/logout}" class="admin"><span
+								class="glyphicon glyphicon-log-out"></span> Log out</a></li>
+					</ul>
 				</div>
 			</nav>
-
-			<div class="jumbotron">
-				<div class="row text-center">
-					<div class="">
-						<h2>Internet Shop</h2>
-					</div>
-				</div>
-
-			</div>
 		</div>
 	</div>
 </body>
