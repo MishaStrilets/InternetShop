@@ -11,20 +11,23 @@
 	<div class="container">
 		<!--/*/ <th:block th:include="header :: header"></th:block> /*/-->
 		<div th:if="${not #lists.isEmpty(goods)}">
-			<h2>List goods</h2>
-			<table class="table table-striped">
-				<tr>
-					<th>Name</th>
-					<th>Price</th>
-					<th>View</th>
-				</tr>
-				<tr th:each="goods : ${goods}">
-					<td th:text="${goods.name}">Name</td>
-					<td th:text="${goods.price}">Price</td>
-					<td><a th:href="${'/goods-' + goods.id}" class="btn btn-info">View</a></td>
-				</tr>
-			</table>
+			<div class="list">
+				<h2>List goods</h2>
+				<table class="table table-striped">
+					<tr>
+						<th>Name</th>
+						<th>Price</th>
+						<th>View</th>
+					</tr>
+					<tr th:each="goods : ${goods}">
+						<td th:text="${goods.name}">Name</td>
+						<td th:text="${goods.price}">Price</td>
+						<td><a th:href="${'/goods-' + goods.id}" class="btn btn-info">View</a></td>
+					</tr>
+				</table>
+			</div>
 		</div>
+		v
 		<!--/*/ <th:block th:include="footer :: footer"></th:block> /*/-->
 	</div>
 </body>

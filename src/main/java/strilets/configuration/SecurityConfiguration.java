@@ -26,10 +26,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.permitAll()
 				.antMatchers("/admin", "/admin-goods", "/admin-goods-new",
 						"/admin-goods-edit", "/admin-goods-edit-{id}",
-						"/admin-goods-delete-{id}", "/admin-goods-view-{id}",
-						"/admin-orders", "/admin-orders-delete-{id}",
-						"/admin-goods-search", "/admin-goods-sort")
-				.access("hasRole('ROLE_ADMIN')").and().formLogin().and()
-				.logout().permitAll().logoutUrl("/logout");
+						"/admin-goods-delete-{id}", "/admin-goods-{id}",
+						"/admin-goods-buy-{id}", "/admin-orders",
+						"/admin-orders-delete-{id}", "/admin-goods-search",
+						"/admin-goods-sort", "/admin-order-{id}",
+						"/admin-order").access("hasRole('ROLE_ADMIN')").and()
+				.formLogin().and().logout().permitAll().logoutUrl("/logout");
 	}
 }

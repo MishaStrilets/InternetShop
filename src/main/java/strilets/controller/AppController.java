@@ -126,6 +126,12 @@ public class AppController {
 		model.addAttribute("goods", goodsService.getGoodsById(id));
 		return "admin_goods_view";
 	}
+	
+	@RequestMapping("/admin-goods-buy-{id}")
+	public String adminBuyGoods(@PathVariable Integer id, Model model) {
+		model.addAttribute("goods", goodsService.getGoodsById(id));
+		return "admin_goods_buy";
+	}
 
 	@RequestMapping("/admin-goods-new")
 	public String newGoods(Model model) {
@@ -176,5 +182,24 @@ public class AppController {
 	public String deleteOrder(@PathVariable Integer id) {
 		orderService.deleteOrder(id);
 		return "redirect:/admin-orders";
+	}
+
+	@RequestMapping("/admin-order-{id}")
+	public String adminNewOrder(@PathVariable Integer id, Model model) {
+		Order order = new Order();
+		model.addAttribute("order", order);
+		String date = new java.util.Date().toString();
+		order.setDate(date);
+		order.setBuy(id);
+		return "admin_order_form";
+	}
+
+	@RequestMapping(value = "/admin-order", method = RequestMethod.POST)
+	public String adminSaveOrder(@Valid Order order, BindingResult result) {
+		if (result.hasErrors()) {
+			return "admin_order_form";
+		}
+		orderService.saveOrder(order);
+		return "redirect:/admin-goods";
 	}
 }
