@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -19,7 +20,7 @@ public class Order {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int orders_id;
+	private int id;
 
 	@NotBlank
 	@Size(max = 30)
@@ -28,8 +29,8 @@ public class Order {
 
 	@NotBlank
 	@Size(max = 15)
-	@Column(name = "CELL_PHONE")
-	private String cellPhone;
+	@Column(name = "PHONE_NUMBER")
+	private String phoneNumber;
 
 	@NotBlank
 	@Size(max = 30)
@@ -40,14 +41,16 @@ public class Order {
 	@Column(name = "DATE")
 	private String date;
 
+	@NotNull
+	@Column(name = "BUY")
 	private int buy;
 
 	public int getId() {
-		return orders_id;
+		return id;
 	}
 
-	public void setId(int orders_id) {
-		this.orders_id = orders_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getSurname() {
@@ -58,12 +61,12 @@ public class Order {
 		this.surname = surname;
 	}
 
-	public String getCellPhone() {
-		return cellPhone;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
 
-	public void setCellPhone(String cellPhone) {
-		this.cellPhone = cellPhone;
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	public String getPlace() {

@@ -20,7 +20,7 @@ public class Goods {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int goods_id;
+	private int id;
 
 	@NotBlank
 	@Size(max = 30)
@@ -37,11 +37,11 @@ public class Goods {
 	private float price;
 
 	public int getId() {
-		return goods_id;
+		return id;
 	}
 
-	public void setId(int goods_id) {
-		this.goods_id = goods_id;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getName() {

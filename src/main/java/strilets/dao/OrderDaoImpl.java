@@ -18,7 +18,7 @@ public class OrderDaoImpl extends AbstractDao<Integer, Order> implements
 
 	public void deleteOrder(int id) {
 		Query query = getSession().createSQLQuery(
-				"delete from Orders where orders_id = :id");
+				"delete from Orders where id = :id");
 		query.setLong("id", id);
 		query.executeUpdate();
 	}

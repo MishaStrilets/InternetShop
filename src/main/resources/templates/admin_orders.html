@@ -16,7 +16,7 @@
 					<tr>
 						<th>Id</th>
 						<th>Surname</th>
-						<th>Cell phone</th>
+						<th>Phone number</th>
 						<th>Place</th>
 						<th>Date</th>
 						<th>Buy</th>
@@ -25,7 +25,7 @@
 					<tr th:each="order : ${order}">
 						<td th:text="${order.id}">Id</td>
 						<td th:text="${order.surname}">Surname</td>
-						<td th:text="${order.cellPhone}">Cell phone</td>
+						<td th:text="${order.phoneNumber}">Phone number</td>
 						<td th:text="${order.place}">Place</td>
 						<td th:text="${order.date}">Date</td>
 						<td><a th:href="${'/admin-goods-buy-' + order.buy}"

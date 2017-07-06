@@ -26,7 +26,7 @@ public class GoodsDaoImpl extends AbstractDao<Integer, Goods> implements
 	public void deleteGoods(int id) {
 
 		Query query = getSession().createSQLQuery(
-				"delete from Goods where goods_id = :id");
+				"delete from Goods where id = :id");
 		query.setLong("id", id);
 		query.executeUpdate();
 
