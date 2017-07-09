@@ -39,7 +39,8 @@ public class GoodsDaoImpl extends AbstractDao<Integer, Goods> implements
 	@SuppressWarnings("unchecked")
 	public List<Goods> getAllGoods() {
 		Criteria criteria = createEntityCriteria();
-		return (List<Goods>) criteria.list();
+		List<Goods> goods = criteria.list();
+		return goods;
 	}
 
 	@SuppressWarnings("unchecked")

@@ -126,7 +126,7 @@ public class AppController {
 		model.addAttribute("goods", goodsService.getGoodsById(id));
 		return "admin_goods_view";
 	}
-	
+
 	@RequestMapping("/admin-goods-buy-{id}")
 	public String adminBuyGoods(@PathVariable Integer id, Model model) {
 		model.addAttribute("goods", goodsService.getGoodsById(id));
@@ -166,9 +166,17 @@ public class AppController {
 	}
 
 	@RequestMapping("/admin-goods-delete-{id}")
-	public String deleteGoods(@PathVariable Integer id) {
-		goodsService.deleteGoods(id);
-		return "redirect:/admin-goods";
+	public String deleteGoods(@PathVariable Integer id, Model model) {
+		List<Order> orders = null;
+		orders = orderService.getAllOrders(id);
+		if (orders.isEmpty()) {
+			goodsService.deleteGoods(id);
+			return "redirect:/admin-goods";
+		} else {
+			model.addAttribute("order", orders);
+			return "admin_orders";
+		}
+
 	}
 
 	@RequestMapping(value = "/admin-orders", method = RequestMethod.GET)

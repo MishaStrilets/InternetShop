@@ -16,16 +16,20 @@ public class OrderServiceImpl implements OrderService {
 	@Autowired
 	private OrderDao dao;
 
+	public List<Order> getAllOrders() {
+		return dao.getAllOrders();
+	}
+
+	public List<Order> getAllOrders(int buy) {
+		return dao.getAllOrders(buy);
+	}
+
 	public void saveOrder(Order order) {
 		dao.saveOrder(order);
 	}
 
 	public void deleteOrder(int id) {
 		dao.deleteOrder(id);
-	}
-
-	public List<Order> getAllOrders() {
-		return dao.getAllOrders();
 	}
 
 }
